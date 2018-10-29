@@ -53,8 +53,24 @@ namespace BusinessLogic.Test
             Assert.AreEqual(expected, actual);
         }
 
+
         [TestMethod]
-        public void ObjectReferenceTest()
+        public void ValueTypeTest()
+        {
+            //Arrange
+            var c1 = 1;
+            var c2 = c1;
+
+            //Act
+            c2 = 2;
+
+            //Assert
+            Assert.AreEqual(c1, 1);
+
+        }
+
+        [TestMethod]
+        public void ReferenceTypeTest()
         {
             //Arrange
             var c1 = new Customer();
@@ -85,6 +101,52 @@ namespace BusinessLogic.Test
 
             //Assert
             Assert.AreEqual(Customer.InstanceCount, 3);
+        }
+
+        [TestMethod]
+        public void ValidateValid()
+        {
+            //Arrange
+            var customer = new Customer();
+            customer.LastName = "Duy";
+            customer.EmailAddress = "linhduydinh@gmail.com";
+            var expected = true;
+
+            //Act
+            var actual = customer.Validate();
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ValidateMissingLastName()
+        {
+            //Arrange
+            var customer = new Customer();
+            customer.EmailAddress = "linhduydinh@gmail.com";
+            var expected = false;
+
+            //Act
+            var actual = customer.Validate();
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ValidateMissingEmail()
+        {
+            //Arrange
+            var customer = new Customer();
+            customer.LastName = "Duy";
+            var expected = false;
+
+            //Act
+            var actual = customer.Validate();
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
