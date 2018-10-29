@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BusinessLogic
 {
     public class Customer
     {
-        public Customer()
+        public Customer(): this(0)
         {
 
         }
@@ -16,9 +17,14 @@ namespace BusinessLogic
         public Customer(int customerId)
         {
             this.CustomerId = customerId;
+            AddressList = new List<Address>();
         }
 
+        public List<Address> AddressList { get; set; }
+
         public static int InstanceCount { get; set; }
+
+        public int CustomerType { get; set; }
 
         public string FirstName { get; set; }
 
